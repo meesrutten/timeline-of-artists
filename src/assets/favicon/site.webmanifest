@@ -1,0 +1,14 @@
+{
+    "name": "Minor Web Dev",
+    "short_name": "Minor Web Dev",
+    "icons": [
+        {
+            "src": "/assets/favicon/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#007dff",
+    "background_color": "#007dff",
+    "display": "standalone"
+}

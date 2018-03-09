@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+    font: $fontBody;
+    background-color: black;
+    color: #efefef;
+}
+
+header {
+    height: auto;
+    background-color: black;
+    overflow: hidden;
+    text-align: center;
+    // @media all and(max-width: 30em) {
+    //     height: 40vh;
+    // }
+}
+h1 {
+    font: $fontTitle;
+    margin: 0;
+    word-wrap: break-word;
+    color: white;
+    // height: 100%;
+    letter-spacing: -0.1em;
+    @media all and(max-width: 60em){
+        font-size: calc(7vw + 7vh + 7vmin);
+    }
+}
+
+img {
+    max-width: 100%;
+}
+
+::-webkit-scrollbar
+{
+  width: 0.65em;  /* for vertical scrollbars */
+  height: 0.65em; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(255, 255, 255, 1);
+}

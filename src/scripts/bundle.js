@@ -1,4 +1,4 @@
-import app from './app'
+import app from './app.js'
 import animation from './animation'
 
 // // Import a module using CommonJS syntax

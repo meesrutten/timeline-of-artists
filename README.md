@@ -14,3 +14,19 @@ This project is a prototype built in a week, so my code is not that pretty (sorr
 I mainly focussed on aesthetics and animation.
 
 ![gif of project](https://github.com/meesrutten/timeline-of-artists/blob/master/timeline-artist-Mees-Rutten.gif "The Project")
+
+## Browser Technologies
+### Progressive enhancement
+
+#### Good:
+- Works without custom fonts
+- Works without images but the site revolves around images...
+- Works without color
+- No cookies
+- No localstorage
+
+#### Bad:
+- No alt tags
+- Does not work without JavaScript...
+- Works with slow connection, but no loading indicator
+- Does not work at all with tab

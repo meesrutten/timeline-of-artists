@@ -4,7 +4,7 @@ function initialAnimation(){
 
 	const mySplitText = new SplitText("#title", {type:"words,chars"})
     const chars = mySplitText.chars; //an array of all the divs that wrap each character
-
+	
 	timeline.set(chars, {autoAlpha: 0})
 	timeline.set('#black_stripe', { transformOrigin: 'left', width: '1100', height: '300', skewX: '-10deg', x: 0, transform: 'none' })
 	timeline.set('[data-type="timeline"], .vertical-timeline', { autoAlpha: 0 })

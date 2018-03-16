@@ -58,6 +58,15 @@ No localstorage was used
 Interface is tab-able
 ![tabs project](https://github.com/meesrutten/timeline-of-artists/blob/browser-technologies/tab.png "The Project")
 
+#### Usability test
+The website works on most devices. Because of a problem with open WiFi and API calls I was not able to get the content.
+My animations work on almost every device (even Kindle browser).
+The only problem sometimes is the layout of the page.
+![image project](https://github.com/meesrutten/timeline-of-artists/blob/browser-technologies/test1.jpg "The Project")
+![image project](https://github.com/meesrutten/timeline-of-artists/blob/browser-technologies/test2.jpg "The Project")
+![image project](https://github.com/meesrutten/timeline-of-artists/blob/browser-technologies/test3.jpg "The Project")
+
+
 #### Changes after research
 - Added aria-labels
 - Changed clickable buttons to a[href]

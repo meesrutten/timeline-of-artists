@@ -29,12 +29,36 @@ Tests were done by using Mac OS VoiceOver and multiple devices
 - No localstorage
 
 #### Bad:
-- No alt tags
+- No alt attribute
 - Does not work without JavaScript...
 - Works with slow connection, but no loading indicator
 - Does not work at all with tab
 
-#### Accessibility
+#### Images
+When images are disabled the user will not see images of the work of the artists.
+They will be able to see the rest of the site.
+![no images in project](https://github.com/meesrutten/timeline-of-artists/blob/browser-technologies/images.png "The Project")
+
+#### Custom fonts
+When custom fonts are disabled users will be able to use the website as normal.
+![no fonts in project](https://github.com/meesrutten/timeline-of-artists/blob/browser-technologies/fonts.png "The Project")
+
+#### Javascript (volledig)
+When Javascript is disabled the user will not see any of the content. Just the title.
+#### Kleur
+Colors used are black and white. The contrast ratio is strong enough for good readability.
+The only colors apart from black and white are in the images.
+#### Breedband internet
+The website will work but the content will render much slower
+#### Cookies
+No cookies were used
+#### localStorage
+No localstorage was used
+#### Muis/Trackpad
+Interface is tab-able
+![tabs project](https://github.com/meesrutten/timeline-of-artists/blob/browser-technologies/tab.png "The Project")
+
+#### Changes after research
 - Added aria-labels
 - Changed clickable buttons to a[href]
 - Set focus state to clickable buttons

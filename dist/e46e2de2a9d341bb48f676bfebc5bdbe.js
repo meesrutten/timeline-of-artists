@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({10:[function(require,module,exports) {
+})({9:[function(require,module,exports) {
 var global = (1,eval)("this");
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -2256,7 +2256,7 @@ var _gsScope = "undefined" != typeof module && module.exports && "undefined" != 
     }j = !1;
   }
 }("undefined" != typeof module && module.exports && "undefined" != typeof global ? global : this || window, "TweenMax");
-},{}],16:[function(require,module,exports) {
+},{}],17:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -2278,7 +2278,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64407' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49464' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -2379,5 +2379,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[16,10])
+},{}]},{},[17,9])
 //# sourceMappingURL=/dist/e46e2de2a9d341bb48f676bfebc5bdbe.map

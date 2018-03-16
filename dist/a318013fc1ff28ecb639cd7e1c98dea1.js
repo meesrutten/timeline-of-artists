@@ -291,7 +291,7 @@ var _animation = require('./animation');
 var _animation2 = _interopRequireDefault(_animation);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./app.js":12,"./animation":14}],16:[function(require,module,exports) {
+},{"./app.js":12,"./animation":14}],17:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -313,7 +313,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64407' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49464' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -414,5 +414,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[16,3])
+},{}]},{},[17,3])
 //# sourceMappingURL=/dist/a318013fc1ff28ecb639cd7e1c98dea1.map

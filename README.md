@@ -30,3 +30,9 @@ I mainly focussed on aesthetics and animation.
 - Does not work without JavaScript...
 - Works with slow connection, but no loading indicator
 - Does not work at all with tab
+
+#### Accessibility
+- Added aria-labels
+- Changed clickable buttons to a[href]
+- Set focus state to clickable buttons
+- The website is fully tab-able

@@ -144,8 +144,8 @@ var app = {
 	onTimeline: true,
 	checkPageAndFetch: function checkPageAndFetch() {
 		var creatorInfo = makeQueryURL(creatorQuery);
-		console.log(creatorInfo);
 		(0, _animation2.default)();
+
 		fetch(creatorInfo).then(function (resp) {
 			return resp.json();
 		}) // transform the data into json
@@ -153,13 +153,15 @@ var app = {
 
 			if (data.results.bindings.length > 0) {
 				var _goToPersonPage = function _goToPersonPage(event) {
+					console.log(event.target);
 					window.scrollTo(0, 0);
 					document.querySelector('[data-view="person"]').style = "display: block;";
 					document.querySelector('[data-view="timeline"]').style = "display: none;";
 					app.onTimeline = false;
 					var personData = result[Object.keys(result).find(function (key) {
-						return key.includes(event.target.parentElement.querySelector('h2').textContent);
+						return key.includes(event.target.querySelector('h2').textContent);
 					})];
+					console.log(personData);
 					_getPersonData(personData);
 				};
 
@@ -183,20 +185,23 @@ var app = {
 					sortedByYear.forEach(function (work, i) {
 						if (work.werkTitle.value.length < 80) {
 							var werkTitleCleaned = work.werkTitle.value.split('(');
-							document.querySelector('[data-type="info"]').insertAdjacentHTML('beforeend', '   \n\t\t\t\t\t\t\t\t<div class="creatorWorkYear">\n\t\t\t\t\t\t\t\t\t<p>' + work.werkYear.value + '</p>\n\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t<div class="creatorWork">\n\t\t\t\t\t\t\t\t\t<h2>' + werkTitleCleaned[0] + '</h2>\n\t\t\t\t\t\t\t\t\t<img class="timeline-image" src="' + work.werkImg.value + '" alt="">\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t');
+							document.querySelector('[data-type="info"]').insertAdjacentHTML('beforeend', '   \n\t\t\t\t\t\t\t\t<div class="creatorWorkYear" aria-label="Year of the work">\n\t\t\t\t\t\t\t\t\t<p>' + work.werkYear.value + '</p>\n\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t<div class="creatorWork">\n\t\t\t\t\t\t\t\t\t<h2 aria-label="Title of the artists work">' + werkTitleCleaned[0] + '</h2>\n\t\t\t\t\t\t\t\t\t<img class="timeline-image" src="' + work.werkImg.value + '" alt="Image of the artists work">\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t');
 						}
 					});
 
 					(0, _animation2.default)();
-
 					document.querySelector('[data-toggle="timeline"]').addEventListener('click', function () {
+						event.preventDefault();
 						var personView = document.querySelector('[data-view="person"]');
 						personView.style = "display: none;";
 						personView.querySelector('[data-type="timeline"]').remove();
-						personView.insertAdjacentHTML('beforeend', '\n\t\t\t\t\t\t\t<section data-type="timeline">\n\t\t\t\t\t\t\t\t<article data-type="years">\n\t\t\t\t\t\t\t\t\t<p>year</p>\n\t\t\t\t\t\t\t\t</article>\n\t\t\t\t\t\t\t\t<div data-type="line">\n\t\t\t\t\t\t\t\t\t<div data-type="point"></div>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<article data-type="info">\n\t\t\t\t\t\t\t\t</article>\n\t\t\t\t\t\t\t</section>\n\t\t\t\t\t\t\t');
-						window.scrollTo(0, 0);
+						personView.insertAdjacentHTML('beforeend', '\n\t\t\t\t\t\t\t<section data-type="timeline" aria-label="Vertical timeline of artists with their birthyear">\n\t\t\t\t\t\t\t\t<article data-type="years">\n\t\t\t\t\t\t\t\t\t<p>year</p>\n\t\t\t\t\t\t\t\t</article>\n\t\t\t\t\t\t\t\t<div data-type="line">\n\t\t\t\t\t\t\t\t\t<div data-type="point"></div>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<article data-type="info">\n\t\t\t\t\t\t\t\t</article>\n\t\t\t\t\t\t\t</section>\n\t\t\t\t\t\t\t');
+
 						var timelineView = document.querySelector('[data-view="timeline"]');
 						timelineView.style = "display: block;";
+						console.log(window.location.hash);
+						document.querySelector(window.location.hash).scrollIntoView();
+						document.querySelector(window.location.hash).focus();
 					});
 				};
 
@@ -211,10 +216,17 @@ var app = {
 				});
 
 				resultArray.forEach(function (creator) {
+					// console.log(creator);
 					if (creator.length > 8) {
 						var nameWithoutAlias = creator[0].creatorName.value.split(',');
-
-						verticalTimeline.insertAdjacentHTML('beforeend', '\n\t\t\t\t\t\t\t<div class="creatorWork" style="opacity: 0">\n\t\t\t\t\t\t\t\t<div class="creatorWorkYear">\n\t\t\t\t\t\t\t\t\t<p>' + creator[0].birthYear.value + '</p>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<h2>' + nameWithoutAlias[0] + '</h2>\n\t\t\t\t\t\t\t\t<img class="timeline-image" src="' + creator[0].werkImg.value + '" alt="">\n\t\t\t\t\t\t\t</div> \n\t\t\t\t\t\t\t');
+						var firstName = function firstName() {
+							for (var i = 0; i < nameWithoutAlias.length; i++) {
+								var codeLine = nameWithoutAlias[i];
+								return codeLine.substr(0, codeLine.indexOf(" "));
+							}
+						};
+						// console.log(firstName());
+						verticalTimeline.insertAdjacentHTML('beforeend', '\n\t\t\t\t\t\t\t<a class="creatorWork" style="opacity: 0" href="#' + firstName() + '-' + creator[0].birthYear.value + '">\n\t\t\t\t\t\t\t\t<div aria-label="Birthyear of the artist" class="creatorWorkYear">\n\t\t\t\t\t\t\t\t\t<p>' + creator[0].birthYear.value + '</p>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<h2 aria-label="Name of the artist" id="' + firstName() + '-' + creator[0].birthYear.value + '">' + nameWithoutAlias[0] + '</h2>\n\t\t\t\t\t\t\t\t<img class="timeline-image" src="' + creator[0].werkImg.value + '" alt="An image of ' + nameWithoutAlias[0] + '\'s work">\n\t\t\t\t\t\t\t</a> \n\t\t\t\t\t\t\t');
 					}
 				});
 				TweenMax.staggerTo('.creatorWork', 2, { opacity: 1, delay: 1 }, 0.25);
@@ -278,7 +290,7 @@ var _animation = require('./animation');
 var _animation2 = _interopRequireDefault(_animation);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./app.js":12,"./animation":14}],16:[function(require,module,exports) {
+},{"./app.js":12,"./animation":14}],30:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -300,7 +312,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61624' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '62866' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -401,5 +413,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[16,3])
+},{}]},{},[30,3])
 //# sourceMappingURL=/dist/a318013fc1ff28ecb639cd7e1c98dea1.map

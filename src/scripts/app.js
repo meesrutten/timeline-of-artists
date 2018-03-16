@@ -36,14 +36,13 @@ const app = {
 	onTimeline: true,
 	checkPageAndFetch() {
 		const creatorInfo = makeQueryURL(creatorQuery)
-		console.log(creatorInfo);
 		initialAnimation()
+		
 		fetch(creatorInfo)
 			.then((resp) => resp.json()) // transform the data into json
 			.then(function (data) {
 				
 				if (data.results.bindings.length > 0) {
-
 					const verticalTimeline = document.querySelector('.vertical-timeline [data-type="timeline-info"]')
 
 					const result = data.results.bindings.reduce((acc, el) => ({
@@ -54,17 +53,24 @@ const app = {
 					const resultArray = Object.keys(result).map(key => result[key])
 
 					resultArray.forEach( (creator) => {
+						// console.log(creator);
 						if(creator.length > 8){
-							const nameWithoutAlias = creator[0].creatorName.value.split(',')
-
+							const nameWithoutAlias = creator[0].creatorName.value.split(',');
+							const firstName = function() {
+								for (var i = 0; i < nameWithoutAlias.length; i++) {
+									var codeLine = nameWithoutAlias[i];
+									return codeLine.substr(0, codeLine.indexOf(" "));
+								}
+							}
+							// console.log(firstName());
 							verticalTimeline.insertAdjacentHTML('beforeend', `
-							<div class="creatorWork" style="opacity: 0">
-								<div class="creatorWorkYear">
+							<a class="creatorWork" style="opacity: 0" href="#${firstName()}-${creator[0].birthYear.value}">
+								<div aria-label="Birthyear of the artist" class="creatorWorkYear">
 									<p>${creator[0].birthYear.value}</p>
 								</div>
-								<h2>${nameWithoutAlias[0]}</h2>
-								<img class="timeline-image" src="${creator[0].werkImg.value}" alt="">
-							</div> 
+								<h2 aria-label="Name of the artist" id="${firstName()}-${creator[0].birthYear.value}">${nameWithoutAlias[0]}</h2>
+								<img class="timeline-image" src="${creator[0].werkImg.value}" alt="An image of ${nameWithoutAlias[0]}'s work">
+							</a> 
 							`)
 						}
 					} )
@@ -107,18 +113,18 @@ const app = {
 
 					})
 
-
-
 					document.querySelectorAll('[data-type="timeline-info"] .creatorWork').forEach( (el) => {
 						el.addEventListener('click', goToPersonPage)
 					})
 
 					function goToPersonPage(event){
+						console.log(event.target);
 						window.scrollTo(0, 0); 
 						document.querySelector('[data-view="person"]').style = "display: block;"
 						document.querySelector('[data-view="timeline"]').style = "display: none;"
 						app.onTimeline = false;
-						const personData = result[Object.keys(result).find(key => key.includes(event.target.parentElement.querySelector('h2').textContent))]
+						const personData = result[Object.keys(result).find(key => key.includes(event.target.querySelector('h2').textContent))]
+						console.log(personData);
 						getPersonData(personData)
 					}
 
@@ -144,13 +150,13 @@ const app = {
 								const werkTitleCleaned = work.werkTitle.value.split('(')
 								document.querySelector('[data-type="info"]').insertAdjacentHTML('beforeend',
 									`   
-								<div class="creatorWorkYear">
+								<div class="creatorWorkYear" aria-label="Year of the work">
 									<p>${work.werkYear.value}</p>
 								</div>
 
 								<div class="creatorWork">
-									<h2>${werkTitleCleaned[0]}</h2>
-									<img class="timeline-image" src="${work.werkImg.value}" alt="">
+									<h2 aria-label="Title of the artists work">${werkTitleCleaned[0]}</h2>
+									<img class="timeline-image" src="${work.werkImg.value}" alt="Image of the artists work">
 								</div>
 							`
 								)
@@ -158,14 +164,14 @@ const app = {
 						})
 
 						initialAnimation()
-
 						document.querySelector('[data-toggle="timeline"]').addEventListener('click', function(){
+							event.preventDefault()
 							const personView = document.querySelector('[data-view="person"]')
 							personView.style = "display: none;"
 							personView.querySelector('[data-type="timeline"]').remove()
 							personView.insertAdjacentHTML('beforeend', 
 							`
-							<section data-type="timeline">
+							<section data-type="timeline" aria-label="Vertical timeline of artists with their birthyear">
 								<article data-type="years">
 									<p>year</p>
 								</article>
@@ -177,9 +183,12 @@ const app = {
 							</section>
 							`
 							)
-							window.scrollTo(0, 0); 
+
 							const timelineView = document.querySelector('[data-view="timeline"]')
 							timelineView.style = "display: block;"
+							console.log(window.location.hash);
+							document.querySelector(window.location.hash).scrollIntoView()
+							document.querySelector(window.location.hash).focus()
 						})
 					}
 				}

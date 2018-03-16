@@ -65,10 +65,10 @@ const app = {
 							// console.log(firstName());
 							verticalTimeline.insertAdjacentHTML('beforeend', `
 							<a class="creatorWork" style="opacity: 0" href="#${firstName()}-${creator[0].birthYear.value}">
-								<div aria-label="Birthyear of the artist" class="creatorWorkYear">
-									<p>${creator[0].birthYear.value}</p>
+								<div class="creatorWorkYear">
+									<p aria-label="Year of birth is ${creator[0].birthYear.value}">${creator[0].birthYear.value}</p>
 								</div>
-								<h2 aria-label="Name of the artist" id="${firstName()}-${creator[0].birthYear.value}">${nameWithoutAlias[0]}</h2>
+								<h2 id="${firstName()}-${creator[0].birthYear.value}">${nameWithoutAlias[0]}</h2>
 								<img class="timeline-image" src="${creator[0].werkImg.value}" alt="An image of ${nameWithoutAlias[0]}'s work">
 							</a> 
 							`)
@@ -131,7 +131,8 @@ const app = {
 					function getPersonData(personData) {
 						const creatorData = personData
 						const nameWithoutAlias = creatorData[0].creatorName.value.split(',')
-						document.querySelector('#title').textContent = nameWithoutAlias[0]
+						document.querySelector('#title').textContent = nameWithoutAlias[0];
+						document.querySelector('#title').setAttribute('aria-label', creatorData[0].creatorName.value.split(','))
 						document.querySelector('.birthDate').textContent = creatorData[0].birthYear.value
 						document.querySelector('.deathDate').textContent = creatorData[0].deathYear.value
 
@@ -150,12 +151,12 @@ const app = {
 								const werkTitleCleaned = work.werkTitle.value.split('(')
 								document.querySelector('[data-type="info"]').insertAdjacentHTML('beforeend',
 									`   
-								<div class="creatorWorkYear" aria-label="Year of the work">
+								<div class="creatorWorkYear" aria-label="Year of work is ${work.werkYear.value}">
 									<p>${work.werkYear.value}</p>
 								</div>
 
-								<div class="creatorWork">
-									<h2 aria-label="Title of the artists work">${werkTitleCleaned[0]}</h2>
+								<div class="creatorWork" tabindex="0">
+									<h2 lang="nl">${werkTitleCleaned[0]}</h2>
 									<img class="timeline-image" src="${work.werkImg.value}" alt="Image of the artists work">
 								</div>
 							`
@@ -203,3 +204,29 @@ const app = {
 }
 
 app.checkPageAndFetch()
+
+(function () {
+	const keyshortcutElements = document.querySelectorAll('[aria-keyshortcuts]')
+		console.log(keyshortcutElements);
+	function checkKey(event) {
+		console.log(event);
+		const eventKey = event.key.toUpperCase()
+		const accesskeys = []
+		keyshortcutElements.forEach((elem) => {
+			const key = elem.getAttribute('accesskey').toUpperCase()
+			accesskeys.push(key)
+		})
+		accesskeys.forEach((accesskey) => {
+			if (event.ctrlKey && eventKey === accesskey
+				|| event.ctrlKey && event.altKey && eventKey === accesskey
+				|| event.altKey && eventKey === accesskey
+				|| event.altKey && event.shiftKey && eventKey === accesskey
+			) {
+				const focussedElem = document.querySelector(`[accesskey="${accesskey}"]`)
+				focussedElem.focus()
+			}
+		})
+	}
+
+	window.addEventListener('keydown', checkKey)
+})()

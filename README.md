@@ -19,7 +19,7 @@ I mainly focussed on aesthetics and animation.
 ### Progressive enhancement
 
 Tests were done by using Mac OS VoiceOver and multiple devices
-![voiceover of project](https://github.com/meesrutten/timeline-of-artists/blob/master/voiceover.png "The Project")
+![voiceover of project](https://github.com/meesrutten/timeline-of-artists/blob/browser-technologies/voiceover.png "The Project")
 
 #### Good:
 - Works without custom fonts

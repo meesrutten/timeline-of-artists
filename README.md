@@ -35,4 +35,5 @@ I mainly focussed on aesthetics and animation.
 - Added aria-labels
 - Changed clickable buttons to a[href]
 - Set focus state to clickable buttons
-- The website is fully tab-able
+- The website is now fully tab-able
+- Added accesskeys for back button

@@ -18,6 +18,9 @@ I mainly focussed on aesthetics and animation.
 ## Browser Technologies
 ### Progressive enhancement
 
+Tests were done by using Mac OS VoiceOver and multiple devices
+![voiceover of project](https://github.com/meesrutten/timeline-of-artists/blob/master/voiceover.png "The Project")
+
 #### Good:
 - Works without custom fonts
 - Works without images but the site revolves around images...
@@ -36,4 +39,4 @@ I mainly focussed on aesthetics and animation.
 - Changed clickable buttons to a[href]
 - Set focus state to clickable buttons
 - The website is now fully tab-able
-- Added accesskeys for back button
+
